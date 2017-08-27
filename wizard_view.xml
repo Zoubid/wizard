@@ -1,0 +1,56 @@
+
+<openerp>
+	<data>
+		<!-- Action to open To-do Task list -->
+			<act_window id="action_wizard"
+			name="call wizard"
+			res_model="call.wizard"
+			view_mode="tree,form" />
+			<!-- Menu item to open To-do Task list -->
+			<menuitem id="menu _todo_task"
+			name="calling the wizard"
+			parent="mail.mail_feeds"
+			sequence="20"
+			action="action_wizard" />
+
+		<record id="wizard_view_id" model="ir.ui.view">
+			<field name="name">wizard name</field>
+			<field name="model">wizard</field>
+			<field name="arch" type="xml">
+				<form string="hello im the wizard">
+					<group>
+						<field name="name"/>
+					</group>
+					<footer>
+						<button name="create_request" string="Finished" type="object" class="btn-primary"/>
+						<button string="cancel" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record id="action_view_wizard" model="ir.actions.act_window">
+            <field name="name">Hi i am a wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_view_id"/>
+            <field name="target">new</field>
+        </record>
+        <record id="button_wizard_id" model="ir.ui.view">
+        	<field name="name">buton for wizard</field>
+        	<field name="model">call.wizard</field>
+        	<field name="arch" type="xml">
+        		<form>
+		       <button
+		       type="action"
+		       name="%(wizard.action_view_wizard)d"
+		       string="wizard"
+		       class="oe_highlight"
+		       help="Finish Order"/>
+		       <button class="oe_highlight" type="object" name="open" string="wizard2"/>
+		   </form>
+        	</field>
+        </record>
+	</data>
+</openerp>
